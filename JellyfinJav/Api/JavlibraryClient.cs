@@ -167,7 +167,7 @@ namespace JellyfinJav.Api
 
             var genres = doc.QuerySelectorAll(".genre a").Select(n => n.TextContent);
             var studio = doc.QuerySelector("#video_maker a")?.TextContent;
-            var boxArt = doc.QuerySelector("#video_jacket_img")?.GetAttribute("src")?.Insert(0, "https:");
+            var boxArt = doc.QuerySelector("#video_jacket_img")?.GetAttribute("src");
             var cover = boxArt?.Replace("pl.jpg", "ps.jpg");
 
             return new Api.Video(

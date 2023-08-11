@@ -17,9 +17,9 @@ timestamp = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
 meta = {
     "category": "Metadata",
     "guid": "1d5fffc2-1028-4553-9660-bd4966899e44",
-    "name": "JellyfinJav",
-    "description": "JAV metadata providers for Jellyfin.",
-    "owner": "imaginary-upside",
+    "name": "Jellyfin_JAV",
+    "description": "Branch of original plugin by imaginary-upside",
+    "owner": "rtyui57",
     "overview": "JAV metadata providers for Jellyfin.",
     "targetAbi": f"{targetAbi}.0",
     "timestamp": timestamp,
@@ -46,7 +46,7 @@ entry = {
     "checksum": md5(open(f"release/jellyfinjav_{version}.zip", "rb").read()).hexdigest(),
     "changelog": "",
     "targetAbi": f"{targetAbi}.0",
-    "sourceUrl": f"https://github.com/imaginary-upside/JellyfinJav/releases/download/{version}/jellyfinjav_{version}.zip",
+    "sourceUrl": f"https://github.com/rtyui57/JellyfinJav/releases/download/{version}/jellyfinjav_{version}.zip",
     "timestamp": timestamp,
     "version": version
 }
