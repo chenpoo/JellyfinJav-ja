@@ -24,12 +24,12 @@ namespace JellyfinJav.Api
         /// var results = client.Search("abp");
         /// results.Count // 20
         /// results[10].code // ABP-011
-        /// results[10].url // https://http://www.javlibrary.com/en/?v=javlijdqrm
+        /// results[10].url // https://http://www.javlibrary.com/ja/?v=javlijdqrm
         /// </code>
         /// </example>
         public static async Task<IEnumerable<VideoResult>> Search(string identifier)
         {
-            var doc = await LoadPage("https://www.javlibrary.com/en/vl_searchbyid.php?keyword=" + identifier).ConfigureAwait(false);
+            var doc = await LoadPage("https://www.javlibrary.com/ja/vl_searchbyid.php?keyword=" + identifier).ConfigureAwait(false);
 
             // if only one result was found, and so we were taken directly to the video page.
             if (doc.QuerySelector("#video_id") != null)
@@ -58,7 +58,7 @@ namespace JellyfinJav.Api
             foreach (var n in doc.QuerySelectorAll(".video"))
             {
                 var code = n.QuerySelector(".id").TextContent;
-                var url = new Uri("https://www.javlibrary.com/en/" + n.QuerySelector("a")?.GetAttribute("href"));
+                var url = new Uri("https://www.javlibrary.com/ja/" + n.QuerySelector("a")?.GetAttribute("href"));
                 var id = HttpUtility.ParseQueryString(url.Query)?.Get("v");
 
                 if (code is not null && id is not null)
@@ -80,7 +80,7 @@ namespace JellyfinJav.Api
         /// <example>
         /// <code>
         /// var client = new Javlibrary.Client();
-        /// var result = client.LoadVideo(new Url("http://www.javlibrary.com/en/?v=javlijazsu"));
+        /// var result = client.LoadVideo(new Url("http://www.javlibrary.com/ja/?v=javlijazsu"));
         /// result.Id // javlijazsu
         /// result.Title // Fan Fan PRESTIGE Large Thanksgiving Soil And Shiro To Spree Yamakawa Blue Sky Meets Escalate! Basutsua ~
         /// </code>
@@ -106,7 +106,7 @@ namespace JellyfinJav.Api
         /// </example>
         public static async Task<Video?> SearchFirst(string code)
         {
-            var doc = await LoadPage("http://www.javlibrary.com/en/vl_searchbyid.php?keyword=" + code).ConfigureAwait(false);
+            var doc = await LoadPage("http://www.javlibrary.com/ja/vl_searchbyid.php?keyword=" + code).ConfigureAwait(false);
 
             if (doc.QuerySelector("p em")?.TextContent == "Search returned no result." ||
                 doc.QuerySelector("#badalert td")?.TextContent == "The search term you entered is invalid. Please try a different term.")
@@ -120,7 +120,7 @@ namespace JellyfinJav.Api
                 return ParseVideoPage(doc);
             }
 
-            return await LoadVideo(new Uri("https://www.javlibrary.com/en/" + doc.QuerySelector(".video a")?.GetAttribute("href"))).ConfigureAwait(false);
+            return await LoadVideo(new Uri("https://www.javlibrary.com/ja/" + doc.QuerySelector(".video a")?.GetAttribute("href"))).ConfigureAwait(false);
         }
 
         /// <summary>Loads a specific JAV by id.</summary>
@@ -136,7 +136,7 @@ namespace JellyfinJav.Api
         /// </example>
         public static async Task<Video?> LoadVideo(string id)
         {
-            return await LoadVideo(new Uri("https://www.javlibrary.com/en/?v=" + id)).ConfigureAwait(false);
+            return await LoadVideo(new Uri("https://www.javlibrary.com/ja/?v=" + id)).ConfigureAwait(false);
         }
 
         private static async Task<IDocument> LoadPage(string url)
